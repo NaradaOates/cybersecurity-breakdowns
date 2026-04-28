@@ -113,7 +113,7 @@ In plain terms - the malware assembled and decrypted itself piece by piece insid
  
 Before proceeding with any of the above, the malware first checked whether it was running inside a **sandbox**, which is a controlled, isolated environment that security researchers use to safely rum and study malware. If it detected it was being analysed, it would stop executing, making it significantly harder for researchers to study its full behaviour. Only if all checks passed would it proceed to connect to the C2 server.
  
-**MITRE ATT&CK:** `T1497` — Virtualisation/Sandbox Evasion
+**MITRE ATT&CK:** `T1497` - Virtualisation/Sandbox Evasion
  
 ---
  
