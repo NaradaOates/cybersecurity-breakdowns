@@ -57,15 +57,15 @@ Had I not checked first and/or decided to install the software earlier, I would 
 
 > **Note:** The April 3 start date from Breakglass Intelligence conflicts slightly with the April 9 confirmed breach window. April 3 likely refers to preparatory activity rather than active malware distribution. Additionally, CPUID's statement references "approximately six hours" which refers to the active redirect window specifically, not the total compromise period.
 
-## 03 — Technical Breakdown
+## 03 - Technical Breakdown
  
-> **Background — MITRE ATT&CK:** The technique IDs referenced throughout this section use the [MITRE ATT&CK framework](https://attack.mitre.org) — a globally recognised, standardised catalogue of the methods threat actors use to carry out attacks. Each technique is assigned a unique ID (prefixed with `T`) so that researchers and security teams worldwide can reference the same technique without ambiguity. Sub-techniques are denoted with a dot (e.g. `T1574.001`).
+> **Background - MITRE ATT&CK:** The technique IDs referenced throughout this section use the [MITRE ATT&CK framework](https://attack.mitre.org). A globally recognised, standardised catalogue of the methods threat actors use to carry out attacks. Each technique is assigned a unique ID (prefixed with `T`) so that researchers and security teams worldwide can reference the same technique without ambiguity. Sub-techniques are denoted with a dot (e.g. `T1574.001`).
 
 ---
 
 ### Initial Vector
  
-Supply chain attack — CPUID's side API was compromised, causing the official `cpuid[.]com` website to randomly serve malicious download links in place of legitimate ones. The trojanised installers were hosted on attacker-controlled Cloudflare R2 infrastructure under the domain `supp0v3[.]com`, and distributed both as ZIP archives and standalone installers.
+It was a supply chain attack which led to CPUID's side API being compromised. This caused the official `cpuid[.]com` website to randomly serve malicious download links in place of legitimate ones. The trojanised installers were hosted on attacker-controlled Cloudflare R2 infrastructure under the domain `supp0v3[.]com`, and distributed both as ZIP archives and standalone installers.
  
 **MITRE ATT&CK:** `T1195.002` — Supply Chain Compromise: Compromise Software Supply Chain
  
