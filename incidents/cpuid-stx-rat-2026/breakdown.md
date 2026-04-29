@@ -129,3 +129,16 @@ The final payload connected to a hardcoded C2 domain - `welcome[.]supp0v3[.]com`
 To avoid detection by EDR (Endpoint Detection and Response) tools monitoring Windows system calls, the malware **proxied NTDLL functionality from a .NET assembly**.
  
 NTDLL is a core Windows system file that security tools monitor closely because almost everything a program does on Windows passes through it. Rather than using the real NTDLL, which security tools watch closely, the malware created its own version of those functions and routed its activity through that instead, effectively stepping around the security camera watching the front door.
+
+---
+
+### Payload & Primary Objective
+ 
+The final payload was **STX RAT** - a Remote Access Trojan with infostealer capabilities. The malware's primary objective was **browser credential theft**, specifically targeting Google Chrome's IElevation COM interface to access and decrypt stored passwords and session cookies.
+ 
+Session cookies are particularly valuable to attackers because they represent an already-authenticated session. This means they can allow access to accounts without the password, and in some cases can **bypass multi-factor authentication (MFA)** entirely. The malware also segmented victims profile data by campaign tag and referrer software. This suggest the attacker was methodically cataloguing victims for potential follow-on exploitation or sale.
+ 
+**MITRE ATT&CK:** `T1539` — Steal Web Session Cookie  
+**MITRE ATT&CK:** `T1555.003` — Credentials from Password Stores: Credentials from Web Browsers
+ 
+---
