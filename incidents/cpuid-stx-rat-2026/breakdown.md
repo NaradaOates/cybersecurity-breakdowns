@@ -142,3 +142,94 @@ Session cookies are particularly valuable to attackers because they represent an
 **MITRE ATT&CK:** `T1555.003`- Credentials from Password Stores: Credentials from Web Browsers
  
 ---
+
+### Affected Software & Systems
+ 
+| Field | Detail |
+|---|---|
+| **Affected software** | CPU-Z, HWMonitor, HWMonitor PRO, PerfMonitor, PowerMAX |
+| **Affected versions** | 64-bit versions only |
+| **Affected OS** | Windows (64-bit) |
+| **Original binaries compromised?** | No. CPUID's signed original files were never tampered with |
+ 
+---
+
+### MITRE ATT&CK Summary
+ 
+| ID | Technique |
+|---|---|
+| `T1195.002` | Supply Chain Compromise: Compromise Software Supply Chain |
+| `T1574.001` | Hijack Execution Flow: DLL Search Order Hijacking |
+| `T1027` | Obfuscated Files or Information |
+| `T1055` | Process Injection |
+| `T1140` | Deobfuscate/Decode Files or Information |
+| `T1070.006` | Indicator Removal: Timestomp |
+| `T1539` | Steal Web Session Cookie |
+| `T1555.003` | Credentials from Password Stores: Credentials from Web Browsers |
+| `T1497` | Virtualisation/Sandbox Evasion |
+ 
+---
+
+## 04 - Indicators of Compromise (IOCs)
+ 
+> All domains and IP addresses below are **defanged**. The `[.]` notation replaces `.` to prevent accidental clicks on malicious links. Use the live versions when importing into security tools.
+ 
+---
+ 
+### Malicious Domains & C2 Infrastructure
+ 
+| Indicator | Type | Description |
+|---|---|---|
+| `supp0v3[.]com` | Domain | Attacker-controlled domain used to host trojanised installers |
+| `welcome[.]supp0v3[.]com` | Domain | Hardcoded C2 domain embedded in the STX RAT payload |
+| `95.216.51[.]236` | IP Address | C2 IP address reused from the July 2025 campaign and the FileZilla attack |
+ 
+---
+
+### Malicious File Names
+ 
+| File Name | Description |
+|---|---|
+| `HWiNFO_Monitor_Setup.exe` | Trojanised installer masquerading as a legitimate HWiNFO file |
+| `CRYPTBASE.dll` | Malicious DLL sideloaded by the legitimate CPUID executables |
+| `superbad.exe` | Earliest known STX RAT sample, observed July 2025 |
+ 
+---
+ 
+### Affected Legitimate File Names
+ 
+> These are the legitimate CPUID files. Only trojanised versions distributed during the breach window were malicious. The originals were clean.
+ 
+- `hwmonitor_1.63.exe`
+- CPU-Z installer
+- PerfMonitor installer
+- PowerMAX installer
+---
+
+### File Hashes
+ 
+File hashes for the malicious DLLs and installer files were published by Kaspersky in their threat intelligence report. These should be pulled directly from the Kaspersky report at `securelist[.]com` and added here, as reproducing them without direct verification risks introducing errors.
+ 
+eSentire's YARA rules are also available for detecting STX RAT samples across endpoints - search *"eSentire STX RAT YARA rules"* to locate them.
+ 
+---
+ 
+### AV Detection Names
+ 
+Various antivirus engines flagged the malicious files under different labels, including:
+ 
+- `Trojan.Teddy`
+- `Trojan.Artemis`
+At least **32 engines** on VirusTotal flagged the installer as malicious at the time of discovery. Note that different AV engines assign different names to the same malware - `Teddy` and `Artemis` are generic catch-all labels used when an engine detects trojan-like behaviour but does not have a precise signature match. They are not separate malware families.
+ 
+---
+ 
+### Additional Forensic Indicators
+ 
+| Indicator | Detail |
+|---|---|
+| **Falsified timestamp** | `2077-08-31 05:16:43` - malicious `CRYPTBASE.dll` compilation timestamp artificially set to a future date via timestomping |
+| **Delivery infrastructure** | Attacker-controlled Cloudflare R2 storage used to host trojanised packages |
+| **Distribution format** | Both ZIP archives and standalone installers |
+ 
+---
