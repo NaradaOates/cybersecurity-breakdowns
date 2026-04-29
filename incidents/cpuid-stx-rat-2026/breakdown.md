@@ -138,7 +138,7 @@ The final payload was **STX RAT** - a Remote Access Trojan with infostealer capa
  
 Session cookies are particularly valuable to attackers because they represent an already-authenticated session. This means they can allow access to accounts without the password, and in some cases can **bypass multi-factor authentication (MFA)** entirely. The malware also segmented victims profile data by campaign tag and referrer software. This suggest the attacker was methodically cataloguing victims for potential follow-on exploitation or sale.
  
-**MITRE ATT&CK:** `T1539` — Steal Web Session Cookie  
-**MITRE ATT&CK:** `T1555.003` — Credentials from Password Stores: Credentials from Web Browsers
+**MITRE ATT&CK:** `T1539`- Steal Web Session Cookie  
+**MITRE ATT&CK:** `T1555.003`- Credentials from Password Stores: Credentials from Web Browsers
  
 ---
