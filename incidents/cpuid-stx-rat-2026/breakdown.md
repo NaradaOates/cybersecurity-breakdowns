@@ -59,7 +59,7 @@ Had I not checked first and/or decided to install the software earlier, I would 
 
 ## 03 - Technical Breakdown
  
-> **Background - MITRE ATT&CK:** The technique IDs referenced throughout this section use the [MITRE ATT&CK framework](https://attack.mitre.org). A globally recognised, standardised catalogue of the methods threat actors use to carry out attacks. Each technique is assigned a unique ID (prefixed with `T`) so that researchers and security teams worldwide can reference the same technique without ambiguity. Sub-techniques are denoted with a dot (e.g. `T1574.001`).
+> **MITRE ATT&CK:** The technique IDs referenced throughout this section use the [MITRE ATT&CK framework](https://attack.mitre.org). A globally recognised, standardised catalogue of the methods threat actors use to carry out attacks. Each technique is assigned a unique ID (prefixed with `T`) so that researchers and security teams worldwide can reference the same technique without ambiguity. Sub-techniques are denoted with a dot (e.g. `T1574.001`).
 
 ---
 
@@ -351,7 +351,7 @@ CPUID's original signed binaries were never compromised. The legitimate `hwmonit
 ---
  
 ### CVEs (Common Vulnerabiliuties and Exposures)
-CVEs are a standardised naming system for publicly know security vulnerabilities. Every know vulnerability is assigned a unique ID, which allows security professionals, vendors, and tools to discuss issues without confusions. The system is maintained by the MITRE Corporation, with input from vendors, researchers, and organizations worldwide.
+> CVEs are a standardised naming system for publicly know security vulnerabilities. Every know vulnerability is assigned a unique ID, which allows security professionals, vendors, and tools to discuss issues without confusions. The system is maintained by the MITRE Corporation, with input from vendors, researchers, and organizations worldwide.
 
 No specific CVEs have been publicly assigned to this incident at time of writing. The attack exploited a compromised API rather than a known software vulnerability. This means there is no patch to apply in the traditional sense. The vector was the supply chain itself rather than a flaw in the end user's software.
 
