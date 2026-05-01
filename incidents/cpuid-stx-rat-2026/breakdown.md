@@ -233,3 +233,123 @@ At least **32 engines** on VirusTotal flagged the installer as malicious at the 
 | **Distribution format** | Both ZIP archives and standalone installers |
  
 ---
+
+## 05 - Impact Assessment
+
+| Field | Detail |
+|---|---|
+| **Victims confirmed** | 150+ (Kaspersky visibility at time of reporting. Likely a significant undercount) |
+| **Financial damage** | Not publicly disclosed |
+| **Data compromised** | Browser-stored passwords, session cookies, host metadata |
+| **Operational impact** | CPUID download infrastructure disrupted for approximately six hours |
+ 
+---
+ 
+### Victim Breakdown
+ 
+The majority of confirmed victims were individuals. Organisations across the following sectors were also impacted:
+ 
+- Retail
+- Manufacturing
+- Consulting
+- Telecommunications
+- Agriculture
+Confirmed affected regions: **Brazil, Russia, China**
+ 
+---
+ 
+### Scale of Potential Exposure
+ 
+CPU-Z alone has tens of millions of users globally, and HWMonitor is standard equipment for IT professionals, system administrators, data centre operators, and PC enthusiasts worldwide. The six-hour breach window on software of this reach represented an extraordinary infection opportunity - the true number of people who downloaded the malicious installer during that window is not publicly known, and CPUID has not disclosed download statistics for the period.
+ 
+The **150+ figure should be treated as a floor, not a ceiling.** The malware's fileless, in-memory design means many victims would have seen no obvious signs of compromise and may never know they were affected.
+ 
+---
+ 
+### Data at Risk
+ 
+- **Browser-stored passwords and login credentials** - harvested via Chrome's IElevation COM interface
+- **Session cookies** - particularly valuable as they can allow account access without a password and in some cases bypass MFA entirely
+- **Host metadata** - transmitted to the C2 server for victim identification and campaign tracking
+---
+ 
+### Broader Campaign Context
+ 
+This breach was not an isolated incident. Breakglass Intelligence assessed it as part of a **10-month campaign** beginning in July 2025, with the earlier FileZilla trojanisation attack using the same infrastructure and payload. The pattern of targeting widely used, trusted utilities suggests the threat actor has an established and repeatable playbook for supply chain attacks, and further campaigns targeting other popular software cannot be ruled out.
+ 
+If the stolen credentials were sold rather than used directly, which is consistent with the initial access broker theory, then the impact may extend far beyond what any single report can capture. Victims could potentially be facing follow-up attacks from entirely different threat actors who purchased access to the stolen credentials. 
+ 
+---
+
+---
+ 
+## 06 - Detection & Mitigation
+ 
+### Detection
+ 
+**VirusTotal**
+ 
+At the time of discovery, the malicious installer was flagged by at least 32 antivirus engines on VirusTotal (`virustotal[.]com`). Users who suspect they downloaded a compromised file during the breach window can upload it to VirusTotal to check it against multiple AV engines simultaneously. File hashes published by Kaspersky can also be checked directly without needing to upload the file itself.
+ 
+**YARA Rules**
+ 
+eSentire published YARA rules specifically capable of detecting STX RAT samples. Security teams can deploy these rules within their EDR or SIEM tools to hunt for signs of the malware across their environments.
+ 
+> **SIEM** stands for *Security Information and Event Management* - a platform that aggregates and analyses security logs from across an organisation's systems in one place, helping teams spot suspicious patterns.
+ 
+**Kaspersky IOCs**
+ 
+Kaspersky published a full set of IOCs including file hashes, malicious domains, and the C2 IP address. These can be imported directly into threat intelligence platforms or firewall blocklists. Available at `securelist[.]com`.
+ 
+**Behavioural Indicators**
+ 
+Look for the following on any system that ran a CPUID installer during the breach window:
+ 
+- Unexpected outbound connections to `supp0v3[.]com` or `welcome[.]supp0v3[.]com`
+- `CRYPTBASE.dll` loaded from any location other than the Windows System32 directory
+- `HWMonitor_x64.exe` spawning unexpected child processes
+- PowerShell activity triggered by a hardware monitoring application
+- .NET compilation activity occurring at the same time as a CPUID product launch
+- Unusual interaction with Google Chrome's IElevation COM interface
+
+**Windows Defender**
+ 
+Several victims reported that Windows Defender flagged the malicious installer immediately upon download, before execution. Users with Defender active and up to date were partially protected at the point of delivery, though this would not have caught every variant given the malware's evasion capabilities.
+ 
+**Hash Verification**
+ 
+CPUID's original signed binaries were never compromised. The legitimate `hwmonitor_1.63.exe` remained accessible via its direct download URL throughout the breach window - its hash would not have matched the malicious version. This highlights the value of verifying file hashes before executing any installer.
+ 
+---
+ 
+### Mitigation
+ 
+**If you downloaded CPUID software between April 9, 15:00 UTC and April 10, 10:00 UTC:**
+ 
+- Assume compromise and treat any credentials stored in your browser as potentially stolen
+- Immediately change passwords for all important accounts. Prioritise email, banking, cryptocurrency, and any corporate accounts
+- Revoke active session cookies where possible. Most platforms allow this by signing out of all devices in your account security settings
+- Enable MFA on all accounts if not already active. Consider switching to an authenticator app rather than SMS-based MFA
+- Run a full system scan using an updated AV tool and cross-reference against Kaspersky's published IOCs
+- If you are part of an organisation, notify your security team immediately. Do not attempt to remediate alone
+
+**For security teams and organisations:**
+ 
+- Block the known malicious domains and C2 IP address at the firewall and DNS level using Kaspersky's IOCs
+- Deploy eSentire's YARA rules to hunt for STX RAT across endpoints
+- Search endpoint logs for the behavioural indicators listed above, particularly unexpected `CRYPTBASE.dll` loads outside of System32
+- Review browser credential stores on any machine that ran a CPUID installer during the breach window and rotate credentials as a precaution
+- Check for lateral movement. Given STX RAT's remote access capabilities, a compromised machine should be treated as a potential foothold for further activity within the network
+
+**General hardening recommendations highlighted by this incident:**
+ 
+- Always verify file hashes before running installers downloaded from the web. Most developers publish expected hash values alongside their downloads
+- Be suspicious of installers that launch in an unexpected language or under an unexpected file name
+- Avoid storing passwords in your browser where possible. Use a dedicated password manager instead, as these are significantly harder for infostealers to access
+- Keep EDR and AV tools updated. The malware's evasion techniques were sophisticated, but several engines still detected it
+- Monitor outbound DNS and HTTP/S traffic for connections to unexpected domains, particularly from applications that have no legitimate reason to make network connections (such as hardware monitoring tools)
+---
+ 
+### CVEs
+ 
+No specific CVEs have been publicly assigned to this incident at time of writing. The attack exploited a compromised API rather than a known software vulnerability. This means there is no patch to apply in the traditional sense. The vector was the supply chain itself rather than a flaw in the end user's software.
