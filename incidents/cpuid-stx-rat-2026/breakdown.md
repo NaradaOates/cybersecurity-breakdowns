@@ -350,6 +350,58 @@ CPUID's original signed binaries were never compromised. The legitimate `hwmonit
 - Monitor outbound DNS and HTTP/S traffic for connections to unexpected domains, particularly from applications that have no legitimate reason to make network connections (such as hardware monitoring tools)
 ---
  
-### CVEs
- 
+### CVEs (Common Vulnerabiliuties and Exposures)
+CVEs are a standardised naming system for publicly know security vulnerabilities. Every know vulnerability is assigned a unique ID, which allows security professionals, vendors, and tools to discuss issues without confusions. The system is maintained by the MITRE Corporation, with input from vendors, researchers, and organizations worldwide.
+
 No specific CVEs have been publicly assigned to this incident at time of writing. The attack exploited a compromised API rather than a known software vulnerability. This means there is no patch to apply in the traditional sense. The vector was the supply chain itself rather than a flaw in the end user's software.
+
+## 07 - Sources & References
+ 
+> Sources accessed April 2026. Cybersecurity reports are sometimes updated or revised after publication. Please check each source directly for the most current version.
+ 
+---
+ 
+### Primary Research & Threat Intelligence
+ 
+| Source | Notes |
+|---|---|
+| **Kaspersky** (`securelist[.]com`) | Primary technical analysis - breach window, victim count, DLL sideloading, C2 infrastructure, FileZilla campaign link, and full IOC set |
+| **Breakglass Intelligence** | Attribution analysis - Russian-speaking threat actor, 10-month campaign timeline, April 3 possible earlier start date |
+| **Cyderes Howler Cell** (`cyderes[.]com/howler-cell/how-cpuids-hwmonitor-supply-chain-was-hijacked-to-deploy-stx-rat`) | In-depth technical breakdown - five-stage unpacking chain, DLL sideloading mechanics, timestomping, NTDLL proxying |
+| **eSentire** | YARA rules for STX RAT detection and infostealer capability documentation |
+| **vx-underground** (`x[.]com/vxunderground`) | Early community analysis, fileless operation, evasion techniques, browser credential theft objective |
+ 
+---
+ 
+### News & Media Coverage
+ 
+| Source | URL |
+|---|---|
+| **BleepingComputer** | `bleepingcomputer[.]com/news/security/supply-chain-attack-at-cpuid-pushes-malware-with-cpu-z-hwmonitor` |
+| **The Hacker News** | `thehackernews[.]com/2026/04/cpuid-breach-distributes-stx-rat-via.html` |
+| **The Register** | `theregister[.]com/2026/04/10/cpuid_site_hijacked` |
+| **SecurityWeek** | `securityweek[.]com/cpuid-hacked-to-serve-trojanized-cpu-z-and-hwmonitor-downloads` |
+| **Tom's Hardware** | `tomshardware[.]com/tech-industry/cyber-security/hwmonitor-and-cpu-z-developer-cpuid-breached-by-unknown-attackers` |
+| **Cybernews** | `cybernews[.]com/security/cpuid-hwmonitor-hwinfo-cpuz-deliver-malware` |
+| **Help Net Security** | `helpnetsecurity[.]com/2026/04/13/cpuid-download-malware` |
+| **UpGuard** | `upguard[.]com/news/cpuid-data-breach-2026-04-13` |
+ 
+---
+ 
+### Reference Frameworks & Tools
+ 
+| Resource | URL | Purpose |
+|---|---|---|
+| **MITRE ATT&CK** | `attack[.]mitre[.]org` | Reference for all technique IDs listed in Section 03 |
+| **VirusTotal** | `virustotal[.]com` | Multi-engine malware scanning; check Kaspersky hashes here |
+| **MalwareBazaar** | `bazaar.abuse[.]ch` | STX RAT sample cross-referencing |
+ 
+---
+ 
+### Primary Statement
+ 
+**Samuel Demeulemeester (CPUID contributor)** - Official public statement issued 10th April 2026, confirming the breach, acknowledging the compromised side API, and confirming the fix. Quoted across multiple outlets.
+ 
+---
+ 
+*Part of the Cybersecurity Incident Breakdowns series.*
