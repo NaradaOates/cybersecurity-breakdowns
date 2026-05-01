@@ -29,7 +29,7 @@ Had I not checked first and/or decided to install the software earlier, I would 
 | Field | Detail |
 |---|---|
 | **Malware name** | STX RAT |
-| **Malware type** | Remote Access Trojan (RAT) with infostealer capabilities |
+| **Malware type** | Remote Access Trojan (RAT) with infomation stealing capabilities |
 | **Incident name** | CPUID Supply Chain Attack |
 | **First observed** | July 2025 (earliest known sample); April 9–10 2026 (CPUID breach window) |
 | **Attributed actor** | Unknown Russian-speaking threat actor |
