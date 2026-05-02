@@ -49,7 +49,7 @@ Had I not checked first and/or decided to install the software earlier, I would 
  **April 3, 2026** | Breakglass Intelligence finds evidence suggesting the CPUID breach may have begun on this date |
 | **April 9, 2026 - 15:00 UTC** | CPUID's side API is confirmed compromised; download links for CPU-Z, HWMonitor, PerfMonitor, and PowerMAX are replaced with links pointing to trojanised installers hosted on attacker-controlled Cloudflare R2 infrastructure |
 | **April 9, 2026 (evening)** | A Reddit user notices their HWMonitor update downloaded a file named `HWiNFO_Monitor_Setup.exe` instead of the expected `hwmonitor_1.63.exe`; Windows Defender flags it immediately; VirusTotal confirms it malicious, flagged by at least 32 AV engines |
-| **April 10, 2026 — 10:00 UTC** | Breach window closes; CPUID fixes the compromised API and restores clean download links; approximately 19 hours of active malware distribution |
+| **April 10, 2026 - 10:00 UTC** | Breach window closes; CPUID fixes the compromised API and restores clean download links; approximately 19 hours of active malware distribution |
 | **April 10, 2026** | CPUID contributor Samuel Demeulemeester issues a public statement confirming the breach, noting the main developer was away on holiday at the time |
 | **April 10, 2026** | vx-underground and malware researcher Giuseppe Massaro publish early technical analysis confirming the malware is deeply trojanised, fileless, and targets browser credentials |
 | **April 11, 2026** | Kaspersky publishes findings confirming 150+ victims and linking the campaign to the earlier FileZilla attacks |
