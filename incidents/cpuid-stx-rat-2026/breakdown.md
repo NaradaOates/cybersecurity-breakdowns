@@ -2,7 +2,7 @@
  
 > **Series:** Cybersecurity Incident Breakdowns  
 > **Status:** Draft - work in progress  
-> **Last updated:** April 2026
+> **Last updated:** May 2026
  
 ---
 ## Why this incident? 
